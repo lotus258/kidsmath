@@ -6,3 +6,7 @@
 .result-container {
 
 }
+
+.error-msg {
+    color: red;
+}

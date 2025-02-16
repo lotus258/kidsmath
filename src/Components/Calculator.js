@@ -1,41 +1,64 @@
 import{useState} from "react"
 import './CSS/Calculator.css'
-
-const getRandomFloat = ((min, max) => {
-    return (Math.random() * (max - min) + min);
-})
+import Card from "./Card.js"
 
 function Calculator() {
-    const [digit, setDigit] = useState(1);
-    const [quantity, setQuantity] = useState(1);
+    const [digit, setDigit] = useState("1");
+    const [quantity, setQuantity] = useState(0);
     const [operator, setOperator] = useState("+");
-    const [result, setResult] = useState(0);
-    const [first, setFirst] = useState(0);
-    const [second, setSecond] = useState(0);
+    const [error, setError] = useState("");
+
+    const changeOperator = (e) => {
+        setOperator(e.target.value);
+    }
+
+    const changeDigit = (e) => {
+        setDigit(e.target.value);
+    }
+
+    const changeQuantity = (e) => {
+        setError('');
+        let currQuantity = e.target.value;
+        if (typeof currQuantity !== "number" ) {
+            setError("Please input a number between 1 and 100");
+        }
+        setQuantity(e.target.value);
+    }
+
+    const reset = () => {
+        setDigit('1');
+        setQuantity(0);
+        setOperator("+");
+        setError("");
+    }
 
     return (
         <div className="calculator-container">
-            <label>select digit</label>
-            <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-            </select>
-            <label>How many do you want to generate?</label>
-            <input></input>
-            <label>What operator do you want to practice on?</label>
-            <select>
-                <option>+</option>
-                <option>-</option>
-                <option>*</option>
-                <option>/</option>
-            </select>
+            <div className="error-msg">
+                {error}
+            </div>
+            <form>
+                <label>Select number digit</label>
+                <select onChange={changeDigit}>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <label>How many do you want to generate? Please input a number between 1 and 100. </label>
+                <input onChange={changeQuantity}></input>
+                <label>What operator do you want to practice on?</label>
+                <select value={operator} onChange={changeOperator}>
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
+                </select>
+                <button onClick={reset}>reset</button>
+            </form >
+
             {Array.from({length: quantity}, (_, i) => (
                 <li key={i} className="result-container">
-                    <div>{first}</div>
-                    <div>{second}</div>
-                    <div>{operator}</div>
-                    <div>{result}</div>
+                        <Card operator={operator} digit={digit} />
                 </li>
             ))}
         </div>
