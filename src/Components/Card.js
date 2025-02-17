@@ -1,5 +1,4 @@
 import{useState, useEffect} from "react"
-import "./CSS/Card.css"
 
 function Card(props) {
     const[result, setResult] = useState('0');
@@ -46,8 +45,6 @@ function Card(props) {
             case "*":
                 setResult(randomFirst * randomSecond);
                 break;
-            case "/":
-                setResult(Math.round(randomFirst / randomSecond));
         }
     }, [props.operator]);
 
@@ -58,23 +55,22 @@ function Card(props) {
 
     const click = () => {
         if (result == input) {
-            setMessage("You got it! Good job!  🏆 ");
+            setMessage("You got it! Good job!" + props.icon);
         } else {
-            setMessage(`Oh no the correct answer is ${result}`);
+            setMessage(`Oh no! The correct answer is ${result}`);
         }
     }
 
     return (
-        <div className="card-container">
-            <div className="first">{first}</div>
-            <div className="second">{second}</div>
-            <div className="operator">{props.operator}</div>
-            <input onChange={changeInput} className="input"></input>
-            <button onClick={click}>Click to check </button>
-            <div>{message}</div>
+        <div className="card-container" style={{display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gridTemplateRows:"repeat(5, 1fr)", width:"25vw", height:"auto", backgroundColor:"yellowgreen", border:"1px solid black", borderRadius:"10px", padding:"1vw"}}>
+            <div className="first" style={{gridColumn:"3", gridRow:"1", justifySelf:"end"}}>{first}</div>
+            <div className="second" style={{gridColumn:"3", gridRow:"2",  justifySelf:"end"}}>{second}</div>
+            <div className="operator"style={{gridColumn:"2", gridRow:"2", justifySelf:"end"}}>{props.operator}</div>
+            <input placeholder="Please input your result" onChange={changeInput} className="input" style={{gridColumn:"2/4", gridRow:"3", textAlign:"right"}}></input>
+            <button onClick={click} style={{gridColumn:"2/4", gridRow:"4"}}>Click to check </button>
+            <div style={{gridColumn:"1/5", gridRow:"5", justifySelf:"center", color:"red"}}>{message}</div>
         </div>
     )
-
 }
 
 export default Card;
