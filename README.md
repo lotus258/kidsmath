@@ -1,8 +1,11 @@
 # Introduction about this app
 This small web app is designed to generate the desired quanity (1-100) of random math equations for kids (5-7) to solve and feel confident. It offers 1, 2, 3 digits and +, -, * operators for selection to accommodate different kids math levels and interest. To keep it engaging for kids, different reward emojis are offered for kids to select.
 
-# What to do next
-Next step is to update the current design layout to make it more appealing to kids. The color selection also consider protecting kids' eyes.
+# What's next in 
+Continually update the current design layout to make it more appealing to kids. The color selection should also be benefitial to kids' eyesight protection.
+
+# Problems to be solved
+## It is a bit challenging for small kids to palce mouse over the button to click. The button size could be adjusted in the future to make it easier for kids. 
 
 # Getting Started with Create React App
 
